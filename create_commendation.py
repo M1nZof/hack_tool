@@ -1,19 +1,26 @@
 import argparse
+from django.core.exceptions import 
 
 def create_commendation(name, subject):
     schoolkid = Schoolkid.objects.filter(full_name__contains=name).first()
-    last_lesson = Lesson.objects.filter(
-        year_of_study=schoolkid.year_of_study,
-        group_letter=schoolkid.group_letter,
-        subject__title=subject
-    ).order_by('-date').first()
-    Commendation.objects.create(
-        text='Хвалю!',
-        created=last_lesson.date,
-        schoolkid=schoolkid,
-        subject=last_lesson.subject,
-        teacher=last_lesson.teacher
-    )
+    if not schoolkid:
+        print('Такой ученик не найден')
+    else:
+        last_lesson = Lesson.objects.filter(
+            year_of_study=schoolkid.year_of_study,
+            group_letter=schoolkid.group_letter,
+            subject__title=subject
+        ).order_by('-date').first()
+        if not last_lesson:
+            print('Такой предмет не найден')
+        else:
+            Commendation.objects.create(
+                text='Хвалю!',
+                created=last_lesson.date,
+                schoolkid=schoolkid,
+                subject=last_lesson.subject,
+                teacher=last_lesson.teacher
+            )
 	
 	
 if __name__ == '__main__':
