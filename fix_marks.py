@@ -5,9 +5,8 @@ from datacenter.models import Schoolkid, Mark
 def fix_marks(schoolkid):
     schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid).first()
     if not schoolkid:
-        print('Такой ученик не найден')
-    else:
-        Mark.objects.filter(schoolkid=schoolkid, points__lt=4).update(points=5)
+        return print('Такой ученик не найден')
+    Mark.objects.filter(schoolkid=schoolkid, points__lt=4).update(points=5)
 
 
 if __name__ == '__main__':
