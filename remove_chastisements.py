@@ -6,7 +6,7 @@ def remove_chastisements(schoolkid):
     schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid).first()
     if not schoolkid:
         return print('Такой ученик не найден')
-    chastisement = Chastisement.objects.filter(schoolkid=schoolkid).all()
+    chastisement = Chastisement.objects.filter(schoolkid=schoolkid)
     if not chastisement:
         return print('Замечаний не найдено')
     chastisement.delete()
