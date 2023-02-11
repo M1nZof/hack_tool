@@ -1,5 +1,5 @@
 import argparse
-from django.core.exceptions import 
+from random import choice
 
 def create_commendation(name, subject):
     schoolkid = Schoolkid.objects.filter(full_name__contains=name).first()
@@ -15,7 +15,7 @@ def create_commendation(name, subject):
             print('Такой предмет не найден')
         else:
             Commendation.objects.create(
-                text='Хвалю!',
+                text=choice(COMMENDATIONS),
                 created=last_lesson.date,
                 schoolkid=schoolkid,
                 subject=last_lesson.subject,
@@ -24,6 +24,11 @@ def create_commendation(name, subject):
 	
 	
 if __name__ == '__main__':
+    COMMENDATIONS = (
+        'Хвалю!', 'Отличная работа!', 'Заметен прогресс!',
+        'Ученик проявил инициативу!', 'Делает хорошие успехи!',
+        'Ученик справился лучше всех!'
+    )
     parser = argparse.ArgumentParser(description='Создает положительный комментарий от учителя по последнему указанному предмету')
     parser.add_argument('name', help='ФИО ученика, которому следует создать рекомендацию (в формате строки)')
     parser.add_argument('subject', help='Предмет, по которому следует создать рекомендацию (в формате строки)')
