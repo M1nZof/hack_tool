@@ -4,6 +4,12 @@ from random import choice
 
 from datacenter.models import Schoolkid, Lesson, Commendation
 
+COMMENDATIONS = (
+    'Хвалю!', 'Отличная работа!', 'Заметен прогресс!',
+    'Ученик проявил инициативу!', 'Делает хорошие успехи!',
+    'Ученик справился лучше всех!'
+)
+
 def create_commendation(name, subject):
     schoolkid = Schoolkid.objects.filter(full_name__contains=name).first()
     if not schoolkid:
@@ -27,11 +33,6 @@ def create_commendation(name, subject):
 	
 	
 if __name__ == '__main__':
-    COMMENDATIONS = (
-        'Хвалю!', 'Отличная работа!', 'Заметен прогресс!',
-        'Ученик проявил инициативу!', 'Делает хорошие успехи!',
-        'Ученик справился лучше всех!'
-    )
     parser = argparse.ArgumentParser(description='Создает положительный комментарий от учителя по последнему указанному предмету')
     parser.add_argument('name', help='ФИО ученика, которому следует создать рекомендацию (в формате строки)')
     parser.add_argument('subject', help='Предмет, по которому следует создать рекомендацию (в формате строки)')
