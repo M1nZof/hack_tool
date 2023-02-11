@@ -1,7 +1,11 @@
 import argparse
 
 def fix_marks(schoolkid):
-    Mark.objects.filter(schoolkid=schoolkid, points__lt=4).update(points=5)
+    schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid).first()
+    if not schoolkid:
+        print('Такой ученик не найден')
+    else:
+        Mark.objects.filter(schoolkid=schoolkid, points__lt=4).update(points=5)
 
 
 if __name__ == '__main__':
