@@ -1,5 +1,8 @@
 import argparse
+
 from random import choice
+
+from datacenter.models import Schoolkid, Lesson, Commendation
 
 def create_commendation(name, subject):
     schoolkid = Schoolkid.objects.filter(full_name__contains=name).first()

@@ -1,5 +1,7 @@
 import argparse
 
+from datacenter.models import Schoolkid, Chastisement
+
 def remove_chastisements(schoolkid):
     schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid).first()
     if not schoolkid:

@@ -1,5 +1,7 @@
 import argparse
 
+from datacenter.models import Schoolkid, Mark
+
 def fix_marks(schoolkid):
     schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid).first()
     if not schoolkid:
