@@ -1,10 +1,7 @@
 import argparse
 
 def fix_marks(schoolkid):
-    bad_marks = Mark.objects.filter(schoolkid=schoolkid, points__lt=4)
-    for mark in bad_marks:
-        mark.points = 5
-        mark.save()
+    bad_marks = Mark.objects.filter(schoolkid=schoolkid, points__lt=4).update(points=5)
 
 
 if __name__ == '__main__':
